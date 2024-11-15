@@ -85,52 +85,60 @@ def water_usage_calculator():
     st.write(f"Daily Water Usage: {daily_usage:.2f} gallons")
     st.write(f"Monthly Water Usage: {monthly_usage:.2f} gallons")
 
-# Custom CSS for font sizes and styles in the sidebar
-st.markdown(
-    """
+
+
+# Streamlit App
+def main():
+    # Enhanced CSS with global text color for main content
+    st.markdown(
+    f"""
     <style>
-    /* Apply to the sidebar's main container */
-    section[data-testid="stSidebar"] .css-1aumxhk {
-        font-size: 24px !important;
-    }
-    
-    /* Specific sidebar navigation title */
-    section[data-testid="stSidebar"] h1 {
-        font-size: 26px !important;
-        color: #4CAF50;
-    }
+    /* Main content background and global text color */
+    .main {{
+        background-color: #e9f9fa; /* Light blue background for main content */
+        color: #05175c; /* Darker blue text for contrast */
+    }}
 
-    /* Sidebar radio button labels */
-    section[data-testid="stSidebar"] .stRadio > label {
-        font-size: 24px !important;
-        color: #333;
-    }
-
-    /* Sidebar radio button options */
-    section[data-testid="stSidebar"] .stRadio > div > label > div {
-        font-size: 20px !important;
-        color: #333;
-    }
-
-    /* Apply font size to all sidebar elements as a fallback */
-    section[data-testid="stSidebar"] * {
-        font-size: 20px !important;
-    }
-
-    /* Increase main container width */
-    .main .block-container {
+    /* Apply a global text color for all content in the main container */
+    .main .block-container {{
+        color: #05175c; /* Ensures all text in main content is this color */
         max-width: 90%;
-        padding-top: 2rem;
-    }
+        padding: 2rem;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        border: 1px solid #76dfe9;
+    }}
+
+    /* Specific text styles */
+    h1, h2, h3, h4, h5, h6 {{
+        color: #003fc3; /* Dark blue for all headers */
+    }}
+    p, div {{
+        color: #05175c; /* Primary dark text color for paragraphs and divs */
+    }}
+
+    /* Title styling */
+    .title {{
+        font-size: 3em;
+        color: #003fc3; /* Dark blue for high emphasis */
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 0.5em;
+    }}
+
+    /* Sidebar styling */
+    section[data-testid="stSidebar"] {{
+        background-color: #76dfe9;
+        color: #05175c;
+    }}
+
+    /* Additional styling omitted for brevity */
     </style>
     """,
     unsafe_allow_html=True
 )
-
-# Streamlit App
-def main():
     # Add a title with custom class
-    st.markdown("<h1 class='title'>Water Usage Application</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 class='title'>AquaSense Water Usage Application</h1>", unsafe_allow_html=True)
     
     st.sidebar.title("Navigation")
     page = st.sidebar.radio(
@@ -222,3 +230,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

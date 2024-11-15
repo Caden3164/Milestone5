@@ -3,10 +3,7 @@ import pandas as pd
 import streamlit as st
 from openai import OpenAI
 
-# Set Streamlit page config to wide layout
-st.set_page_config(layout="wide")
-
-# Disclaimer: Throughout making this code we did use ChatGPT to aid us in understanding and using different Streamlit functions that we otherwise did not understand
+#Disclaimer: Throughout making this code we did use ChatGPT to aid us in understanding and using different streamlit functions that we otherwise did not understand
 
 # Initialize the OpenAI client using the API key from the environment variable
 api_key = os.getenv("OPENAI_API_KEY")
@@ -58,7 +55,7 @@ def summarize_farm_data(crop_type, irrigation_method, soil_type, avg_rainfall):
     return farm_summary
 
 def water_usage_calculator():
-    st.markdown("<h2 class='header'>Water Usage Calculator</h2>", unsafe_allow_html=True)
+    st.title("Water Usage Calculator")
     
     # Input fields
     shower_time = st.number_input("How many minutes do you shower daily?", min_value=0)
@@ -85,62 +82,14 @@ def water_usage_calculator():
     st.write(f"Daily Water Usage: {daily_usage:.2f} gallons")
     st.write(f"Monthly Water Usage: {monthly_usage:.2f} gallons")
 
-# Custom CSS for font sizes and styles in the sidebar
-st.markdown(
-    """
-    <style>
-    /* Apply to the sidebar's main container */
-    section[data-testid="stSidebar"] .css-1aumxhk {
-        font-size: 24px !important;
-    }
-    
-    /* Specific sidebar navigation title */
-    section[data-testid="stSidebar"] h1 {
-        font-size: 26px !important;
-        color: #4CAF50;
-    }
-
-    /* Sidebar radio button labels */
-    section[data-testid="stSidebar"] .stRadio > label {
-        font-size: 24px !important;
-        color: #333;
-    }
-
-    /* Sidebar radio button options */
-    section[data-testid="stSidebar"] .stRadio > div > label > div {
-        font-size: 20px !important;
-        color: #333;
-    }
-
-    /* Apply font size to all sidebar elements as a fallback */
-    section[data-testid="stSidebar"] * {
-        font-size: 20px !important;
-    }
-
-    /* Increase main container width */
-    .main .block-container {
-        max-width: 90%;
-        padding-top: 2rem;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Streamlit App
 def main():
-    # Add a title with custom class
-    st.markdown("<h1 class='title'>Water Usage Application</h1>", unsafe_allow_html=True)
-    
     st.sidebar.title("Navigation")
-    page = st.sidebar.radio(
-        "Go to", 
-        ["Questionnaire & AI Advice", "Upload & Analyze Faucet Data", "Farmer's Water Usage", "Water Usage Calculator"]
-    )
+    page = st.sidebar.radio("Go to", ["Questionnaire & AI Advice", "Upload & Analyze Faucet Data", "Farmer's Water Usage","Water Usage Calculator"])
 
-    # Existing page selection logic
+
     if page == "Questionnaire & AI Advice":
-        st.markdown("<h2 class='header'>Water Usage Questionnaire - San Jose, CA</h2>", unsafe_allow_html=True)
+        st.title("Water Usage Questionnaire - San Jose, CA")
         
         # Questionnaire
         household_size = st.selectbox("How many people live in your household?", ["1", "2", "3", "4", "5+"])
@@ -172,7 +121,7 @@ def main():
             st.write(advice)
     
     elif page == "Upload & Analyze Faucet Data":
-        st.markdown("<h2 class='header'>Smart Faucet Water Usage Analytics - Upload Data</h2>", unsafe_allow_html=True)
+        st.title("Smart Faucet Water Usage Analytics - Upload Data")
 
         # File upload
         uploaded_file = st.file_uploader("Upload a CSV file with your water usage data", type="csv")
@@ -199,8 +148,9 @@ def main():
             st.subheader("Water Conservation Advice Based on Faucet Data")
             st.write(advice)
 
+     # New section for Farmer's Water Usage
     elif page == "Farmer's Water Usage":
-        st.markdown("<h2 class='header'>Farmer's Water Usage and Irrigation Advice</h2>", unsafe_allow_html=True)
+        st.title("Farmer's Water Usage and Irrigation Advice")
 
         # Farmer's Questionnaire
         crop_type = st.selectbox("Type of crop:", ["Wheat", "Corn", "Rice", "Soybeans", "Other"])
